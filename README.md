@@ -12,7 +12,7 @@
 
 This is where your description should go. Limit it to a paragraph or two. Consider adding a small example.
 
-This package is inspired by the spatie [package skeleton](https://github.com/spatie/package-skeleton-laravel)
+This template is inspired by the spatie [package skeleton template](https://github.com/spatie/package-skeleton-laravel)
 
 ## Installation
 
