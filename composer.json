@@ -41,7 +41,8 @@
     "scripts": {
         "test": "./vendor/bin/testbench package:test --parallel --no-coverage",
         "test-coverage": "vendor/bin/phpunit --coverage-html coverage",
-        "sniff": "./vendor/bin/phpcs"
+        "sniff": "./vendor/bin/phpcs",
+        "sniff-fix": "./vendor/bin/phpcbf"
     },
     "config": {
         "sort-packages": true
