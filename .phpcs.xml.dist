@@ -33,6 +33,7 @@
    <exclude-pattern>*/*.blade.php</exclude-pattern>
    <exclude-pattern>*/autoload.php</exclude-pattern>
    <exclude-pattern>*/vendor/*</exclude-pattern>
+   <exclude-pattern>*/database/*</exclude-pattern>
 
    <!--
       You can hard-code command line values into your custom standard.
