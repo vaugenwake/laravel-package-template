@@ -9,7 +9,6 @@ class SkeletonServiceProvider extends ServiceProvider
 
     /**
      * Bootstrap any application services
-     * 
      * @return void
      */
     public function boot()
@@ -18,7 +17,6 @@ class SkeletonServiceProvider extends ServiceProvider
 
     /**
      * Register any application services.
-     * 
      * @return void
      */
     public function register()
