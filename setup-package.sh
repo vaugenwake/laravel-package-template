@@ -100,3 +100,39 @@ echo "This script will replace the above values in all relevant files in the pro
 if ! confirm "Modify files?"; then
     $safe_exit 1
 fi
+
+grep -E -r -l -i ":author|:vendor|:package|VendorName|skeleton" --exclude-dir=vendor ./* ./.github/* \
+| grep -v "$script_name" \
+| while read -r file ; do
+    new_file="$file"
+    new_file="${new_file//Skeleton/$ClassName}"
+    new_file="${new_file//skeleton/$package_slug}"
+    new_file="${new_file//laravel_/}"
+    echo "adapting file $file -> $new_file"
+        temp_file="$file.temp"
+        < "$file" \
+          sed "s/:author_name/$author_name/g" \
+        | sed "s/:author_username/$author_username/g" \
+        | sed "s/author@domain.com/$author_email/g" \
+        | sed "s/:vendor_name/$vendor_name/g" \
+        | sed "s/vendor_slug/$vendor_slug/g" \
+        | sed "s/VendorName/$VendorName/g" \
+        | sed "s/:package_name/$package_name/g" \
+        | sed "s/package_slug/$package_slug/g" \
+        | sed "s/skeleton/$package_slug/g" \
+        | sed "s/Skeleton/$ClassName/g" \
+        | sed "s/:package_description/$package_description/g" \
+        | sed "/^\[\]\(delete\) /d" \
+        > "$temp_file"
+        rm -f "$file"
+        mv "$temp_file" "$new_file"
+done
+
+if confirm "Execute composer install and phpunit test"; then
+    composer install && ./vendor/bin/phpunit
+fi
+
+if confirm 'Let this script delete itself (since you only need it once)?'; then
+    echo "Delete $0 !"
+    sleep 1 && rm -- "$0"
+fi
