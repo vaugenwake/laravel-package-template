@@ -17,6 +17,12 @@ jobs:
         php-version: '8.0'
     - uses: actions/checkout@v2
 
+    - name: Find and replace Project Key
+      run: sed 's/REPLACE_PROJECT_KEY/${{ secrets.PROJECT_KEY }}/g -i sonar-project.properties'
+
+    - name: Find and replace Organisation Key
+      run: sed 's/REPLACE_ORGANIZATION/${{ secrets.ORGANISATION_KEY }}/g -i sonar-project.properties'
+
     - name: Cache Composer packages
       id: composer-cache
       uses: actions/cache@v2
