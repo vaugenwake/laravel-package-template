@@ -17,6 +17,12 @@ jobs:
         php-version: '8.0'
     - uses: actions/checkout@v2
 
+    - name: Find and replace Project Key
+      run: sed 's/REPLACE_PROJECT_KEY/${{ secrets.PROJECT_KEY }}/g -i sonar-project.properties'
+
+    - name: Find and replace Organisation Key
+      run: sed 's/REPLACE_ORGANIZATION/${{ secrets.ORGANISATION_KEY }}/g -i sonar-project.properties'
+
     - name: Cache Composer packages
       id: composer-cache
       uses: actions/cache@v2
@@ -34,4 +40,16 @@ jobs:
       run: composer sniff
       
     - name: Execute tests
-      run: composer test
+      run: composer test-coverage
+
+    - name: Archive code coverage results
+      uses: actions/upload-artifact@v3
+      with:
+        name: code-coverage-report
+        path: coverage/xml/
+
+    - name: SonarCloud Scan
+      uses: SonarSource/sonarcloud-github-action@master
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}  # Needed to get PR information, if any
+        SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}

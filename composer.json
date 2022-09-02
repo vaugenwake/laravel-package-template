@@ -39,8 +39,8 @@
         }
     },
     "scripts": {
-        "test": "./vendor/bin/testbench package:test --parallel --no-coverage",
-        "test-coverage": "vendor/bin/phpunit --coverage-html coverage",
+        "test": "./vendor/bin/phpunit",
+        "test-coverage": "./vendor/bin/phpunit --coverage-xml=xml",
         "sniff": "./vendor/bin/phpcs",
         "sniff-fix": "./vendor/bin/phpcbf"
     },
