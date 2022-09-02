@@ -42,17 +42,8 @@ jobs:
         name: code-coverage-report
         path: coverage/xml/
 
-    - name: Analyze with SonarCloud
-      uses: sonarsource/sonarcloud-github-action@master
+    - name: SonarCloud Scan
+      uses: SonarSource/sonarcloud-github-action@master
       env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}  # Needed to get PR information, if any
         SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
-      with:
-        args: >
-          -Dsonar.organization=${{ secrets.ORGANISATION_KEY }}
-          -Dsonar.projectKey=${{ secrets.PROJECT_KEY }}
-          -Dsonar.python.coverage.reportPaths=coverage/xml
-          -Dsonar.sources=lib/
-          -Dsonar.test.exclusions=tests/**
-          -Dsonar.tests=tests/
-          -Dsonar.verbose=true
