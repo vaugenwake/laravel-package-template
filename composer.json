@@ -40,7 +40,7 @@
     },
     "scripts": {
         "test": "./vendor/bin/testbench package:test --parallel --no-coverage",
-        "test-coverage": "./vendor/bin/testbench package:test --parallel --coverage",
+        "test-coverage": "./vendor/bin/testbench package:test --parallel --coverage-xml",
         "sniff": "./vendor/bin/phpcs",
         "sniff-fix": "./vendor/bin/phpcbf"
     },
